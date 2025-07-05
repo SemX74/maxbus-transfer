@@ -222,6 +222,17 @@ const Testimonials = () => {
         viewport={{ once: true }}
         className="text-center"
       >
+        <p className="text-md text-center font-bold mt-12 text-gray-200 max-w-2xl mx-auto">
+          І ще багато-багато інших відгуків, які ви можете знайти на{" "}
+          <a
+            href="https://www.instagram.com/maxbus_aeroport/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary"
+          >
+            Instagram
+          </a>
+        </p>
         <p className="text-sm text-center font-bold mt-12 text-gray-200 max-w-2xl mx-auto">
           Долучайтесь до них 😉
         </p>
