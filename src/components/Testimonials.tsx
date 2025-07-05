@@ -93,7 +93,7 @@ const Testimonials = () => {
         </motion.div>
 
         {/* Feedback Grid */}
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-0.5">
+        <div className="grid grid-cols-6 sm:grid-cols-7 md:grid-cols-8 lg:grid-cols-9 xl:grid-cols-10 gap-0.5 sm:gap-1">
           {feedbackImages.map((imageName, index) => {
             // Calculate wave delay based on position in grid
             const cols = 10; // Use max columns for consistent calculation
@@ -124,13 +124,13 @@ const Testimonials = () => {
                       alt={`Customer feedback ${index + 1}`}
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-110"
-                      sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 16vw, (max-width: 1280px) 12.5vw, 10vw"
+                      sizes="(max-width: 640px) 16vw, (max-width: 768px) 14vw, (max-width: 1024px) 12vw, (max-width: 1280px) 11vw, 10vw"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="bg-white/90 rounded-full p-2">
+                      <div className="bg-white/90 rounded-full p-1 sm:p-2">
                         <svg
-                          className="w-4 h-4 text-primary"
+                          className="w-3 h-3 sm:w-4 sm:h-4 text-primary"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"

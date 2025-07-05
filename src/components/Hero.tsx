@@ -4,7 +4,8 @@ import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import heroBus from "@/assets/hero-bg.png";
 import Image from "next/image";
-import Logo from "@/assets/logo.svg";
+import Lottie from "lottie-react";
+import logoAnimation from "../../public/logo.json";
 import AnimatedCounter from "@/components/ui/animated-counter";
 
 const Hero = () => {
@@ -37,23 +38,13 @@ const Hero = () => {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center text-center lg:text-left">
           {/* Logo - Mobile Top */}
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: -30,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 0.6,
-              delay: 0.1,
-            }}
-            className="lg:hidden mb-8 flex justify-center"
-          >
-            <div className="bg-white rounded-2xl p-3 shadow-lg">
-              <Logo className="h-24 w-24 text-primary" />
+          <motion.div className="lg:hidden mb-8 flex justify-center">
+            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-3 shadow-lg">
+              <Lottie
+                animationData={logoAnimation}
+                loop={false}
+                className="h-42 w-42"
+              />
             </div>
           </motion.div>
 
@@ -170,7 +161,11 @@ const Hero = () => {
             className="hidden lg:flex justify-center lg:justify-end mt-8 lg:mt-0"
           >
             <div className="bg-white rounded-3xl p-6 lg:p-8 shadow-lg">
-              <Logo className="h-72 w-72 lg:h-96 lg:w-96 text-primary" />
+              <Lottie
+                animationData={logoAnimation}
+                loop={false}
+                className="h-72 w-72 lg:h-96 lg:w-96"
+              />
             </div>
           </motion.div>
         </div>
