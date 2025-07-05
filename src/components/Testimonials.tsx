@@ -57,6 +57,34 @@ const Testimonials = () => {
     "IMG_4580.JPG",
     "IMG_4581.JPG",
     "IMG_4582.JPG",
+    // New PNG feedback images
+    "IMG_4608.PNG",
+    "IMG_4609.PNG",
+    "IMG_4610.PNG",
+    "IMG_4612.PNG",
+    "IMG_4613.PNG",
+    "IMG_4615.PNG",
+    "IMG_4616.PNG",
+    "IMG_4617.PNG",
+    "IMG_4621.PNG",
+    "IMG_4622.PNG",
+    "IMG_4623.PNG",
+    "IMG_4624.PNG",
+    "IMG_4626.PNG",
+    "IMG_4627.PNG",
+    "IMG_4628.PNG",
+    "IMG_4629.PNG",
+    "IMG_4630.PNG",
+    "IMG_4631.PNG",
+    "IMG_4632.PNG",
+    "IMG_4634.PNG",
+    "IMG_4635.PNG",
+    "IMG_4637.PNG",
+    "IMG_4638.PNG",
+    "IMG_4640.PNG",
+    "IMG_4641.PNG",
+    "IMG_4642.PNG",
+    "IMG_4643.PNG",
   ];
 
   const openPopup = (imageName: string) => {
@@ -93,10 +121,10 @@ const Testimonials = () => {
         </motion.div>
 
         {/* Feedback Grid */}
-        <div className="grid grid-cols-6 sm:grid-cols-7 md:grid-cols-8 lg:grid-cols-9 xl:grid-cols-10 gap-0.5 sm:gap-1">
+        <div className="grid grid-cols-10 md:grid-cols-11 lg:grid-cols-12 xl:grid-cols-12 2xl:grid-cols-14 gap-0.5 sm:gap-1">
           {feedbackImages.map((imageName, index) => {
             // Calculate wave delay based on position in grid
-            const cols = 10; // Use max columns for consistent calculation
+            const cols = 14; // Use max columns for consistent calculation
             const row = Math.floor(index / cols);
             const col = index % cols;
             // Create wave effect: diagonal wave from top-left to bottom-right
@@ -187,6 +215,17 @@ const Testimonials = () => {
           </motion.div>
         )}
       </div>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="text-center"
+      >
+        <p className="text-sm text-center font-bold mt-12 text-gray-200 max-w-2xl mx-auto">
+          Долучайтесь до них 😉
+        </p>
+      </motion.div>
     </section>
   );
 };

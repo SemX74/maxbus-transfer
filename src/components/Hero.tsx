@@ -2,11 +2,13 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
-import heroBus from "@/assets/hero-bg.png";
+import heroBus from "../../public/hero-bg.png";
 import Image from "next/image";
 import Lottie from "lottie-react";
 import logoAnimation from "../../public/logo.json";
+import logoBgAnimation from "../../public/logo-bg-2.json";
 import AnimatedCounter from "@/components/ui/animated-counter";
+import BookingFormExctracted from "./BookingFormExctracted";
 
 const Hero = () => {
   const t = useTranslations();
@@ -28,7 +30,7 @@ const Hero = () => {
           priority
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 via-secondary/70 to-transparent" />
+        <div className="absolute backdrop-blur-sm  max-sm:bg-black/40 inset-0 bg-gradient-to-r from-secondary/90 via-secondary/70 to-transparent" />
       </div>
 
       {/* Diagonal Shape Element */}
@@ -36,14 +38,14 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center text-center lg:text-left">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-20 lg:items-center text-center lg:text-left">
           {/* Logo - Mobile Top */}
-          <motion.div className="lg:hidden mb-8 flex justify-center">
-            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-3 shadow-lg">
+          <motion.div className="lg:hidden bg-white/20 backdrop-blur-sm rounded-2xl shadow-lg mb-8 flex justify-center">
+            <div className="relative flex justify-center">
               <Lottie
                 animationData={logoAnimation}
                 loop={false}
-                className="h-42 w-42"
+                className="h-auto w-2/3 relative z-10"
               />
             </div>
           </motion.div>
@@ -64,6 +66,11 @@ const Hero = () => {
             }}
             className="space-y-6 lg:space-y-8"
           >
+            <Lottie
+              animationData={logoAnimation}
+              loop={false}
+              className="h-96 w-96 -mb-10 lg:h-auto max-lg:hidden lg:w-[15rem] relative z-10"
+            />
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
               <span className="text-primary">{t("hero.title")}</span>{" "}
               {t("hero.titleHighlight")}
@@ -142,7 +149,6 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Large Logo - Desktop Only */}
           <motion.div
             initial={{
               opacity: 0,
@@ -156,15 +162,9 @@ const Hero = () => {
               duration: 0.8,
               delay: 0.4,
             }}
-            className="hidden lg:flex justify-center lg:justify-end mt-8 lg:mt-0"
+            className="max-lg:hidden"
           >
-            <div className="bg-white rounded-3xl p-6 lg:p-8 shadow-lg">
-              <Lottie
-                animationData={logoAnimation}
-                loop={false}
-                className="h-72 w-72 lg:h-96 lg:w-96"
-              />
-            </div>
+            <BookingFormExctracted showTitle showPrice={false} />
           </motion.div>
         </div>
       </div>
