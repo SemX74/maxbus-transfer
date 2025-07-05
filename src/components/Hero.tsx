@@ -65,11 +65,8 @@ const Hero = () => {
             className="space-y-6 lg:space-y-8"
           >
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
-              {t("hero.title")}
-              <span className="block text-primary">
-                {" "}
-                {t("hero.titleHighlight")}
-              </span>
+              <span className="text-primary">{t("hero.title")}</span>{" "}
+              {t("hero.titleHighlight")}
             </h1>
 
             <p className="text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto lg:mx-0">
@@ -127,7 +124,8 @@ const Hero = () => {
               </div>
               <div className="text-center lg:text-left">
                 <div className="text-2xl sm:text-3xl font-bold text-primary">
-                  <AnimatedCounter value={5} />
+                  {">"}
+                  <AnimatedCounter value={8} />
                 </div>
                 <div className="text-xs sm:text-sm text-gray-300">
                   {t("hero.stats.years")}

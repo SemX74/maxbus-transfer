@@ -1,8 +1,8 @@
 {
   "hero": {
-    "title": "Comfortable Transfers",
-    "titleHighlight": "to Europe",
-    "subtitle": "Professional transfer service from Chernivtsi to European cities. Fast, safe, and comfortable.",
+    "title": "MaxBus Transfer",
+    "titleHighlight": "– your reliable carrier!",
+    "subtitle": "Professional transfer service from Chernivtsi to Suceava, Bucharest, Iasi and other European cities. Fast, safe, and comfortable.",
     "bookBtn": "Book Transfer",
     "bookingBtn": "Book Transfer",
     "callBtn": "Call Us",
@@ -30,6 +30,13 @@
     "titleHighlight": "Transfer",
     "subtitle": "Fill out the form below and we'll get back to you shortly",
     "formTitle": "Complete Your Booking",
+    "route": "Route",
+    "from": "From",
+    "to": "To",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "cityPlaceholder": "City",
+    "swapTooltip": "Swap direction",
     "name": "Name",
     "namePlaceholder": "Your full name",
     "fullName": "Full Name",
@@ -50,11 +57,22 @@
     "departureTime": "Departure Time",
     "passengers": "Passengers",
     "passenger": "passenger",
+    "passengers2": "passengers",
     "passengersPlaceholder": "Number of passengers",
     "numberOfPassengers": "Number of Passengers",
     "selectPassengers": "Select passengers",
+    "selectQuantity": "Select quantity",
+    "comments": "Comments",
+    "commentsPlaceholder": "Additional requests or questions...",
+    "commentsOptional": "Comments (optional)",
+    "priceEstimate": "Estimated cost:",
+    "priceFor": "For",
+    "priceForPassenger": "passenger",
+    "priceForPassengers": "passengers",
     "submitBtn": "Send Request",
     "bookNowBtn": "Get Instant Quote & Book Now",
+    "bookTripBtn": "🚐 Book Trip",
+    "sending": "Sending...",
     "successTitle": "Booking Request Received!",
     "successMessage": "We'll call you shortly to confirm your transfer details.",
     "cancellationPolicy": "Free cancellation up to 24 hours before departure"
@@ -199,7 +217,7 @@
         "name": "Chernivtsi",
         "address": "Holovnа 265 ATB store",
         "hours": "According to schedule",
-        "phone": "+380 (XX) XXX-XXXX",
+        "phone": "+380 96 169 16 42",
         "features": {
           "0": "Central location",
           "1": "Easy parking",
@@ -214,13 +232,6 @@
     "quickLinks": "Quick Links",
     "contact": "Contact",
     "followUs": "Follow Us",
-    "rights": "All rights reserved.",
-    "links": {
-      "home": "Home",
-      "services": "Services",
-      "routes": "Routes",
-      "about": "About",
-      "contact": "Contact"
-    }
+    "rights": "All rights reserved."
   }
 }

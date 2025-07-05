@@ -68,7 +68,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-20 bg-muted relative overflow-hidden">
+    <section className="py-20 bg-gradient-hero relative overflow-hidden">
       {/* Diagonal Background Elements */}
       <div className="absolute top-0 right-0 w-1/4 h-full bg-gradient-primary opacity-5 transform skew-x-12 translate-x-1/3" />
       <div className="absolute bottom-0 left-0 w-1/3 h-2/3 bg-secondary opacity-5 transform -skew-x-12 -translate-x-1/2" />
@@ -81,13 +81,13 @@ const Testimonials = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-4xl font-bold text-white mb-4">
             {t("testimonials.title")}{" "}
             <span className="text-primary">
               {t("testimonials.titleHighlight")}
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-gray-200 max-w-2xl mx-auto">
             {t("testimonials.alternativeSubtitle")}
           </p>
         </motion.div>

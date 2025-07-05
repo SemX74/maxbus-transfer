@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-const TELEGRAM_BOT_TOKEN = "7867579875:AAG-HEL84euP691fyRBDGCYMU6OrwCJKeQw";
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "590861634";
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 // Zod schema for form validation
 const bookingSchema = z.object({

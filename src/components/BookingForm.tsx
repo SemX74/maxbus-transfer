@@ -26,6 +26,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
+import { routes } from "@/lib/data";
 
 // Zod schema for form validation
 const bookingSchema = z.object({
@@ -60,7 +61,17 @@ const BookingForm = () => {
   const t = useTranslations();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const otherDestinations = ["Сучава", "Ясси", "Кишинів", "Бухарест"];
+  // Get unique destinations from routes data
+  const allDestinations = Array.from(
+    new Set([
+      ...routes.map((route) => route.from.ua),
+      ...routes.map((route) => route.to.ua),
+    ])
+  );
+
+  const otherDestinations = allDestinations.filter(
+    (dest) => dest !== "Чернівці"
+  );
   const [isFromChernivtsi, setIsFromChernivtsi] = useState(true);
 
   const form = useForm<BookingFormData>({
@@ -78,22 +89,47 @@ const BookingForm = () => {
   });
 
   const swapDestinations = () => {
-    const currentOtherCity = isFromChernivtsi
-      ? form.getValues("to")
-      : form.getValues("from");
+    const currentFrom = form.getValues("from");
+    const currentTo = form.getValues("to");
 
     if (isFromChernivtsi) {
       // Currently: Chernivtsi → Other, change to: Other → Chernivtsi
-      form.setValue("from", currentOtherCity);
+      const otherCity =
+        currentTo !== "Чернівці" ? currentTo : otherDestinations[0];
+      form.setValue("from", otherCity);
       form.setValue("to", "Чернівці");
     } else {
       // Currently: Other → Chernivtsi, change to: Chernivtsi → Other
+      const otherCity =
+        currentFrom !== "Чернівці" ? currentFrom : otherDestinations[0];
       form.setValue("from", "Чернівці");
-      form.setValue("to", currentOtherCity);
+      form.setValue("to", otherCity);
     }
 
     setIsFromChernivtsi(!isFromChernivtsi);
   };
+
+  // Calculate estimated price
+  const calculatePrice = () => {
+    const fromCity = form.watch("from");
+    const toCity = form.watch("to");
+    const passengers = form.watch("passengers") || 1;
+
+    // Find matching route
+    const route = routes.find(
+      (r) =>
+        (r.from.ua === fromCity && r.to.ua === toCity) ||
+        (r.from.ua === toCity && r.to.ua === fromCity)
+    );
+
+    if (route) {
+      return route.pricing.adult * passengers;
+    }
+
+    return null;
+  };
+
+  const estimatedPrice = calculatePrice();
 
   const onSubmit = async (data: BookingFormData) => {
     setIsSubmitting(true);
@@ -191,21 +227,21 @@ const BookingForm = () => {
                     <div className="md:col-span-2">
                       <FormLabel className="flex items-center text-sm font-medium text-card-foreground mb-4">
                         <MapPin className="h-4 w-4 mr-2 text-primary" />
-                        Маршрут
+                        {t("booking.route")}
                       </FormLabel>
 
                       <div className="grid grid-cols-5 gap-2 items-end">
                         {/* From - Static or Select */}
-                        <div className="col-span-2 relative">
-                          <div className="absolute -top-2 left-2 px-1 bg-card text-xs text-muted-foreground z-10">
-                            Звідки
-                          </div>
+                        <div className="col-span-2">
                           {isFromChernivtsi ? (
                             <FormField
                               control={form.control}
                               name="from"
                               render={() => (
                                 <FormItem>
+                                  <FormLabel className="text-xs text-muted-foreground mb-1">
+                                    {t("booking.fromLabel")}
+                                  </FormLabel>
                                   <FormControl>
                                     <div className="h-12 px-3 py-2 border border-input bg-muted rounded-md flex items-center font-medium text-sm">
                                       Чернівці
@@ -220,6 +256,9 @@ const BookingForm = () => {
                               name="from"
                               render={({ field }) => (
                                 <FormItem>
+                                  <FormLabel className="text-xs text-muted-foreground mb-1">
+                                    {t("booking.fromLabel")}
+                                  </FormLabel>
                                   <FormControl>
                                     <Select
                                       onValueChange={field.onChange}
@@ -252,30 +291,34 @@ const BookingForm = () => {
                             size="sm"
                             onClick={swapDestinations}
                             className="h-12 w-10 p-0 rounded-lg border-primary text-primary hover:bg-primary hover:text-white transition-colors"
-                            title="Поміняти напрямок"
+                            title={t("booking.swapTooltip")}
                           >
                             <ArrowLeftRight className="h-3 w-3" />
                           </Button>
                         </div>
 
                         {/* To - Select or Static */}
-                        <div className="col-span-2 relative">
-                          <div className="absolute -top-2 left-2 px-1 bg-card text-xs text-muted-foreground z-10">
-                            Куди
-                          </div>
+                        <div className="col-span-2">
                           {isFromChernivtsi ? (
                             <FormField
                               control={form.control}
                               name="to"
                               render={({ field }) => (
                                 <FormItem>
+                                  <FormLabel className="text-xs text-muted-foreground mb-1">
+                                    {t("booking.toLabel")}
+                                  </FormLabel>
                                   <FormControl>
                                     <Select
                                       onValueChange={field.onChange}
                                       value={field.value}
                                     >
                                       <SelectTrigger className="h-12 text-sm">
-                                        <SelectValue placeholder="Місто" />
+                                        <SelectValue
+                                          placeholder={t(
+                                            "booking.cityPlaceholder"
+                                          )}
+                                        />
                                       </SelectTrigger>
                                       <SelectContent>
                                         {otherDestinations.map((city) => (
@@ -296,6 +339,9 @@ const BookingForm = () => {
                               name="to"
                               render={() => (
                                 <FormItem>
+                                  <FormLabel className="text-xs text-muted-foreground mb-1">
+                                    Куди
+                                  </FormLabel>
                                   <FormControl>
                                     <div className="h-12 px-3 py-2 border border-input bg-muted rounded-md flex items-center font-medium text-sm">
                                       Чернівці
@@ -319,7 +365,7 @@ const BookingForm = () => {
                           <FormItem>
                             <FormLabel className="flex items-center text-sm font-medium text-card-foreground">
                               <Calendar className="h-4 w-4 mr-2 text-primary" />
-                              Дата поїздки
+                              {t("booking.travelDate")}
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -342,7 +388,7 @@ const BookingForm = () => {
                           <FormItem>
                             <FormLabel className="flex items-center text-sm font-medium text-card-foreground">
                               <Clock className="h-4 w-4 mr-2 text-primary" />
-                              Час відправлення
+                              {t("booking.departureTime")}
                             </FormLabel>
                             <FormControl>
                               <Input type="time" {...field} className="h-12" />
@@ -361,11 +407,11 @@ const BookingForm = () => {
                         <FormItem>
                           <FormLabel className="flex items-center text-sm font-medium text-card-foreground">
                             <Users className="h-4 w-4 mr-2 text-primary" />
-                            Повне ім&apos;я
+                            {t("booking.fullName")}
                           </FormLabel>
                           <FormControl>
                             <Input
-                              placeholder="Іван Петренко"
+                              placeholder={t("booking.fullNamePlaceholder")}
                               {...field}
                               className="h-12"
                             />
@@ -383,11 +429,11 @@ const BookingForm = () => {
                         <FormItem>
                           <FormLabel className="flex items-center text-sm font-medium text-card-foreground">
                             <Phone className="h-4 w-4 mr-2 text-primary" />
-                            Номер телефону
+                            {t("booking.phoneNumber")}
                           </FormLabel>
                           <FormControl>
                             <Input
-                              placeholder="+380991234567"
+                              placeholder="+380961691642"
                               type="tel"
                               {...field}
                               className="h-12"
@@ -406,7 +452,7 @@ const BookingForm = () => {
                         <FormItem className="md:col-span-2">
                           <FormLabel className="flex items-center text-sm font-medium text-card-foreground">
                             <Users className="h-4 w-4 mr-2 text-primary" />
-                            Кількість пасажирів
+                            {t("booking.numberOfPassengers")}
                           </FormLabel>
                           <Select
                             onValueChange={(value) =>
@@ -416,7 +462,9 @@ const BookingForm = () => {
                           >
                             <FormControl>
                               <SelectTrigger className="h-12">
-                                <SelectValue placeholder="Оберіть кількість" />
+                                <SelectValue
+                                  placeholder={t("booking.selectQuantity")}
+                                />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -425,7 +473,10 @@ const BookingForm = () => {
                                   key={i + 1}
                                   value={(i + 1).toString()}
                                 >
-                                  {i + 1} {i + 1 === 1 ? "пасажир" : "пасажири"}
+                                  {i + 1}{" "}
+                                  {i + 1 === 1
+                                    ? t("booking.passenger")
+                                    : t("booking.passengers2")}
                                 </SelectItem>
                               ))}
                             </SelectContent>
@@ -443,11 +494,11 @@ const BookingForm = () => {
                         <FormItem className="md:col-span-2">
                           <FormLabel className="flex items-center text-sm font-medium text-card-foreground">
                             <MessageSquare className="h-4 w-4 mr-2 text-primary" />
-                            Коментарі (необов&apos;язково)
+                            {t("booking.commentsOptional")}
                           </FormLabel>
                           <FormControl>
                             <Textarea
-                              placeholder="Додаткові побажання або питання..."
+                              placeholder={t("booking.commentsPlaceholder")}
                               {...field}
                               className="min-h-[100px]"
                             />
@@ -458,6 +509,28 @@ const BookingForm = () => {
                     />
                   </div>
 
+                  {/* Price Estimate */}
+                  {estimatedPrice && (
+                    <div className="pt-4">
+                      <div className="bg-primary/10 border border-primary/20 rounded-lg p-4">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-muted-foreground">
+                            {t("booking.priceEstimate")}
+                          </span>
+                          <span className="text-lg font-bold text-primary">
+                            {estimatedPrice}€
+                          </span>
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          {t("booking.priceFor")} {form.watch("passengers")}{" "}
+                          {form.watch("passengers") === 1
+                            ? t("booking.priceForPassenger")
+                            : t("booking.priceForPassengers")}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="pt-6">
                     <Button
                       type="submit"
@@ -466,8 +539,8 @@ const BookingForm = () => {
                       className="w-full bg-gradient-primary hover:opacity-90 text-white font-semibold h-14 text-lg shadow-elegant disabled:opacity-50"
                     >
                       {isSubmitting
-                        ? "Відправляємо..."
-                        : "🚐 Забронювати поїздку"}
+                        ? t("booking.sending")
+                        : t("booking.bookTripBtn")}
                     </Button>
                   </div>
                 </form>
