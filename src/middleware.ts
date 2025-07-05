@@ -4,13 +4,14 @@ const locales = ["en", "ua"];
 const defaultLocale = "ua";
 
 function getLocale(request: NextRequest): string {
-  // Check if locale is stored in cookie
+  // Check if locale is stored in cookie (user explicitly chose language)
   const localeCookie = request.cookies.get("NEXT_LOCALE")?.value;
   if (localeCookie && locales.includes(localeCookie)) {
     return localeCookie;
   }
 
-  // Check Accept-Language header
+  // Default to Ukrainian for majority of users
+  // Only check Accept-Language header if we want to be more specific
   const acceptLanguage = request.headers.get("Accept-Language");
   if (acceptLanguage) {
     // Simple parsing of Accept-Language header
@@ -18,16 +19,22 @@ function getLocale(request: NextRequest): string {
       .split(",")
       .map((lang) => lang.split(";")[0].trim().toLowerCase());
 
+    // Prioritize Ukrainian detection
     for (const lang of preferredLanguages) {
       if (lang === "uk" || lang === "uk-ua" || lang === "ua") {
         return "ua";
       }
+    }
+
+    // Only fallback to English if explicitly English and no Ukrainian preference
+    for (const lang of preferredLanguages) {
       if (lang === "en" || lang.startsWith("en-")) {
         return "en";
       }
     }
   }
 
+  // Default to Ukrainian (majority of users)
   return defaultLocale;
 }
 

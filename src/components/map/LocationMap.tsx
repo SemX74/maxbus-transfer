@@ -4,7 +4,20 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Navigation, Phone, Info } from "lucide-react";
 import { useTranslations } from "next-intl";
-import LeafletMap from "./LeafletMap";
+import dynamic from "next/dynamic";
+
+// Dynamically import LeafletMap with SSR disabled to avoid window errors
+const LeafletMap = dynamic(() => import("./LeafletMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[500px] bg-muted animate-pulse rounded-lg flex items-center justify-center">
+      <div className="flex items-center space-x-2 text-muted-foreground">
+        <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+        <span>Loading map...</span>
+      </div>
+    </div>
+  ),
+});
 
 const LocationMap = () => {
   const t = useTranslations();
