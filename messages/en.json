@@ -102,7 +102,7 @@
       "badge": "Premium",
       "subtitle": "Experience luxury travel with our exclusive VIP service",
       "vehicle": "Mercedes V-Class",
-      "capacity": "Up to 6 passengers",
+      "capacity": "1-8 passengers",
       "priceTitle": "Individual Prices:",
       "bookBtn": "Book VIP Service",
       "features": {
@@ -197,7 +197,7 @@
     "locations": {
       "chernivtsi": {
         "name": "Chernivtsi",
-        "address": "Holovnа Street, 265 B, Chernivtsi, Chernivtsi Oblast, 58000",
+        "address": "Holovnа 265 ATB store",
         "hours": "According to schedule",
         "phone": "+380 (XX) XXX-XXXX",
         "features": {
