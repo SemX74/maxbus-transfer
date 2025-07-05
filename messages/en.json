@@ -1,0 +1,226 @@
+{
+  "hero": {
+    "title": "Comfortable Transfers",
+    "titleHighlight": "to Europe",
+    "subtitle": "Professional transfer service from Chernivtsi to European cities. Fast, safe, and comfortable.",
+    "bookBtn": "Book Transfer",
+    "bookingBtn": "Book Transfer",
+    "callBtn": "Call Us",
+    "quickBooking": "Quick Booking",
+    "stats": {
+      "customers": "Happy Customers",
+      "years": "Years of Experience",
+      "onTime": "On-Time Record"
+    }
+  },
+  "bookingForm": {
+    "title": "Book Your Transfer",
+    "from": "From",
+    "to": "To",
+    "date": "Date",
+    "passengers": "Passengers",
+    "bookBtn": "Book Now",
+    "fromPlaceholder": "Departure city",
+    "toPlaceholder": "Destination city",
+    "datePlaceholder": "Select date",
+    "passengersPlaceholder": "Number of passengers"
+  },
+  "booking": {
+    "title": "Book Your",
+    "titleHighlight": "Transfer",
+    "subtitle": "Fill out the form below and we'll get back to you shortly",
+    "formTitle": "Complete Your Booking",
+    "name": "Name",
+    "namePlaceholder": "Your full name",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Enter your full name",
+    "phone": "Phone",
+    "phonePlaceholder": "Your phone number",
+    "phoneNumber": "Phone Number",
+    "phoneNumberPlaceholder": "Enter your phone number",
+    "destination": "Destination",
+    "destinationPlaceholder": "Where are you going?",
+    "destinationLabel": "Destination",
+    "destinationFormPlaceholder": "Where would you like to go?",
+    "date": "Date",
+    "datePlaceholder": "Select date",
+    "travelDate": "Travel Date",
+    "time": "Time",
+    "timePlaceholder": "Select time",
+    "departureTime": "Departure Time",
+    "passengers": "Passengers",
+    "passenger": "passenger",
+    "passengersPlaceholder": "Number of passengers",
+    "numberOfPassengers": "Number of Passengers",
+    "selectPassengers": "Select passengers",
+    "submitBtn": "Send Request",
+    "bookNowBtn": "Get Instant Quote & Book Now",
+    "successTitle": "Booking Request Received!",
+    "successMessage": "We'll call you shortly to confirm your transfer details.",
+    "cancellationPolicy": "Free cancellation up to 24 hours before departure"
+  },
+  "routes": {
+    "title": "Popular",
+    "titleHighlight": "Routes",
+    "subtitle": "Choose from our most popular destinations with competitive prices",
+    "from": "From",
+    "to": "To",
+    "price": "Price",
+    "duration": "Duration",
+    "bookBtn": "Book Now",
+    "viewAll": "View All Routes",
+    "pricing": {
+      "adults": "Adults",
+      "children": "Children (up to 12y/car seat)",
+      "infants": "Infants (0-2y)",
+      "free": "Free"
+    }
+  },
+  "serviceOptions": {
+    "title": "Choose Your",
+    "titleHighlight": "Service",
+    "subtitle": "We offer different service levels to meet your needs and budget",
+    "specialTitle": "Want a Special",
+    "specialTitleHighlight": "Ride?",
+    "specialSubtitle": "Upgrade to our premium VIP individual service for an extraordinary travel experience",
+    "regular": {
+      "title": "Regular Transfer",
+      "vehicle": "Mercedes Sprinter",
+      "capacity": "Up to 8 passengers",
+      "priceTitle": "Route Prices:",
+      "bookBtn": "Book Regular",
+      "features": [
+        "Comfortable seating",
+        "Air conditioning",
+        "Professional driver",
+        "Scheduled departures",
+        "Affordable pricing"
+      ]
+    },
+    "vip": {
+      "title": "VIP Individual Service",
+      "badge": "Premium",
+      "subtitle": "Experience luxury travel with our exclusive VIP service",
+      "vehicle": "Mercedes V-Class",
+      "capacity": "Up to 6 passengers",
+      "priceTitle": "Individual Prices:",
+      "bookBtn": "Book VIP Service",
+      "features": {
+        "0": {
+          "title": "Regular departures",
+          "description": "Premium Mercedes V-Class vehicles"
+        },
+        "1": {
+          "title": "Adapt to every flight",
+          "description": "Flexible scheduling to match your needs"
+        },
+        "2": {
+          "title": "Large and comfortable fleet",
+          "description": "Airport pickup and flight coordination"
+        },
+        "3": {
+          "title": "Flight ticket booking without overpayments",
+          "description": "Professional licensed drivers"
+        },
+        "4": {
+          "title": "Premium Comfort",
+          "description": "Air conditioning, Wi-Fi, refreshments"
+        },
+        "5": {
+          "title": "Personal Service",
+          "description": "Door-to-door luxury experience"
+        }
+      }
+    }
+  },
+  "whyChooseUs": {
+    "title": "Why Choose",
+    "titleHighlight": "Us",
+    "subtitle": "We provide the best transfer experience with attention to every detail",
+    "features": {
+      "0": {
+        "title": "Professional Drivers",
+        "description": "Experienced and licensed drivers who know the routes perfectly"
+      },
+      "1": {
+        "title": "Comfortable Vehicles",
+        "description": "Modern Mercedes fleet with air conditioning and comfortable seating"
+      },
+      "2": {
+        "title": "Punctuality",
+        "description": "We value your time and guarantee timely arrivals"
+      },
+      "3": {
+        "title": "Safety First",
+        "description": "All vehicles are regularly maintained and fully insured"
+      },
+      "4": {
+        "title": "24/7 Support",
+        "description": "Our customer service is available around the clock"
+      },
+      "5": {
+        "title": "Competitive Prices",
+        "description": "Fair and transparent pricing with no hidden fees"
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Customer",
+    "titleHighlight": "Feedback",
+    "subtitle": "Read what our satisfied customers say about our service",
+    "alternativeSubtitle": "Real feedback from our satisfied customers"
+  },
+  "gallery": {
+    "title": "Our",
+    "titleHighlight": "Gallery",
+    "subtitle": "Browse photos from our services and vehicles"
+  },
+  "locationMap": {
+    "title": "Departure",
+    "titleHighlight": "Location",
+    "subtitle": "Find us easily in the heart of the city",
+    "interactiveMap": "Interactive Map",
+    "clickToView": "Click to view full map",
+    "primaryHubLocations": "Departure Location",
+    "hours": "Hours:",
+    "pickupNote": "Individual pickup from your location by arrangement",
+    "mainLocation": {
+      "name": "Chernivtsi",
+      "address": "Holovnа Street, 265 B, Chernivtsi, Chernivtsi Oblast, 58000",
+      "features": {
+        "0": "Central location",
+        "1": "Easy parking",
+        "2": "24/7 availability",
+        "3": "Professional staff"
+      }
+    },
+    "locations": {
+      "chernivtsi": {
+        "name": "Chernivtsi",
+        "address": "Holovnа Street, 265 B, Chernivtsi, Chernivtsi Oblast, 58000",
+        "hours": "According to schedule",
+        "phone": "+380 (XX) XXX-XXXX",
+        "features": {
+          "0": "Central location",
+          "1": "Easy parking",
+          "2": "24/7 availability",
+          "3": "Professional staff"
+        }
+      }
+    }
+  },
+  "footer": {
+    "description": "Professional transfer service from Chernivtsi to European cities. Comfort, safety, and punctuality.",
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "rights": "All rights reserved.",
+    "links": {
+      "home": "Home",
+      "services": "Services",
+      "routes": "Routes",
+      "about": "About",
+      "contact": "Contact"
+    }
+  }
+}

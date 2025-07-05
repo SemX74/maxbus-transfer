@@ -1,26 +1,145 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Leaflet CSS */
+@import "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+
+/* Leaflet map fixes */
+.leaflet-container {
+  height: 100% !important;
+  width: 100% !important;
+  z-index: 1;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.leaflet-control-container {
+  z-index: 10;
 }
 
-@media (prefers-color-scheme: dark) {
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.leaflet-popup-tip {
+  background: white;
+}
+
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 98%;
+    --foreground: 0 0% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 12%;
+
+    /* MAX BUS Transfer Brand Colors */
+    --primary: 0 75% 55%; /* Red from logo */
+    --primary-foreground: 0 0% 98%;
+    --primary-dark: 0 85% 45%; /* Darker red */
+
+    --secondary: 0 0% 20%; /* Dark gray/black */
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 0 0% 85%; /* Light gray */
+    --accent-foreground: 0 0% 12%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 95%;
+    --ring: 0 75% 55%;
+
+    /* Custom design tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(0 75% 55%), hsl(0 85% 45%));
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(0 0% 8%) 0%,
+      hsl(0 0% 20%) 100%
+    );
+    --shadow-elegant: 0 10px 30px -10px hsl(0 75% 55% / 0.3);
+    --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 75% 55%;
+    --primary-foreground: 0 0% 98%;
+    --primary-dark: 0 85% 45%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 0 75% 55%;
+
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(0 0% 5%) 0%,
+      hsl(0 0% 12%) 100%
+    );
+    --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.3);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
 }
