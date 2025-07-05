@@ -228,10 +228,11 @@
     }
   },
   "footer": {
+    "company": "MAX BUS TRANSFER",
     "description": "Professional transfer service from Chernivtsi to European cities. Comfort, safety, and punctuality.",
     "quickLinks": "Quick Links",
+    "rights": "All rights reserved.",
     "contact": "Contact",
-    "followUs": "Follow Us",
-    "rights": "All rights reserved."
+    "followUs": "Follow Us"
   }
 }
