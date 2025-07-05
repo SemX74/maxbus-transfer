@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { MapPin, Clock, Bus } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Logo from "@/assets/logo.svg";
 
 const Footer = () => {
   const t = useTranslations();
@@ -39,11 +40,7 @@ const Footer = () => {
               viewport={{ once: true }}
               className="lg:col-span-2"
             >
-              <img
-                src="/lovable-uploads/3b684227-6d53-4fd3-90e5-4205dfa17fa7.png"
-                alt={t("footer.company")}
-                className="h-12 mb-6"
-              />
+              <Logo className="h-12 mb-6 text-primary" />
               <p className="text-secondary-foreground/80 mb-6 leading-relaxed max-w-md">
                 {t("footer.alternativeDescription")}
               </p>
