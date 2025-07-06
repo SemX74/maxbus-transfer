@@ -12,12 +12,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Languages } from "lucide-react";
 
-type Locale = "en" | "ua";
+type Locale = "en" | "uk";
 
 const languages = {
   en: { label: "English", flag: "🇺🇸" },
-  ua: { label: "Українська", flag: "🇺🇦" },
-};
+  uk: { label: "Українська", flag: "🇺🇦" },
+} as const;
 
 export default function LanguageSwitcher() {
   const locale = useLocale() as Locale;

@@ -60,13 +60,13 @@ const PopularRoutes = () => {
                     <div className="flex items-center space-x-2">
                       <MapPin className="h-5 w-5 text-primary" />
                       <span className="text-lg font-bold">
-                        {locale === "ua" ? route.from.ua : route.from.en}
+                        {locale === "uk" ? route.from.ua : route.from.en}
                       </span>
                     </div>
                     <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                     <div className="flex items-center space-x-2">
                       <span className="text-lg font-bold">
-                        {locale === "ua" ? route.to.ua : route.to.en}
+                        {locale === "uk" ? route.to.ua : route.to.en}
                       </span>
                       <MapPin className="h-5 w-5 text-primary" />
                     </div>
@@ -81,7 +81,7 @@ const PopularRoutes = () => {
                     <div className="flex items-center text-muted-foreground">
                       <Clock className="h-4 w-4 mr-1" />
                       <span>
-                        {locale === "ua"
+                        {locale === "uk"
                           ? route.duration.ua
                           : route.duration.en}
                       </span>

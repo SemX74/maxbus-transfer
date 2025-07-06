@@ -26,6 +26,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Use getLocale() which will now always default to Ukrainian unless manually changed
   const locale = await getLocale();
   const messages = await getMessages();
 

@@ -134,7 +134,7 @@ const VipSection = () => {
                 {vipPricing.map((route, index) => (
                   <div key={index} className="flex justify-between">
                     <span>
-                      {locale === "ua"
+                      {locale === "uk"
                         ? route.destination.ua
                         : route.destination.en}
                       :

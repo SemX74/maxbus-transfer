@@ -179,7 +179,7 @@ export const formatPrice = (price: number, currency: string): string => {
 
 // Helper function to get free text for infants
 export const getInfantPriceText = (locale: string): string => {
-  return locale === "ua" ? "Безкоштовно" : "Free";
+  return locale === "uk" ? "Безкоштовно" : "Free";
 };
 
 // Helper function to get VIP routes for pricing display
