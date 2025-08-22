@@ -38,7 +38,7 @@ const LocationMap = () => {
   ];
 
   // Map configuration
-  const position: [number, number] = [48.25760006570209, 25.956984827289816];
+  const position: [number, number] = [48.2627259423575, 25.948259388345583];
 
   return (
     <section className="py-20 bg-background">

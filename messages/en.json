@@ -204,7 +204,7 @@
     "pickupNote": "Individual pickup from your location by arrangement",
     "mainLocation": {
       "name": "Chernivtsi",
-      "address": "Holovnа Street, 265 B, Chernivtsi, Chernivtsi Oblast, 58000",
+      "address": "Komara Street, 3A, Chernivtsi, Chernivtsi Oblast, 58000",
       "features": {
         "0": "Central location",
         "1": "Easy parking",
@@ -215,7 +215,7 @@
     "locations": {
       "chernivtsi": {
         "name": "Chernivtsi",
-        "address": "Holovnа 265 ATB store",
+        "address": "Komara Street, 3A, WOG station",
         "hours": "According to schedule",
         "phone": "+380 96 169 16 42",
         "features": {
@@ -229,10 +229,15 @@
   },
   "footer": {
     "company": "MAX BUS TRANSFER",
+    "address": "Chernivtsi, Komara Street, 3A",
     "description": "Professional transfer service from Chernivtsi to European cities. Comfort, safety, and punctuality.",
+    "alternativeDescription": "Professional transfer service from Chernivtsi to European cities. Comfort, safety, and punctuality for all your transportation needs.",
     "quickLinks": "Quick Links",
     "rights": "All rights reserved.",
     "contact": "Contact",
-    "followUs": "Follow Us"
+    "followUs": "Follow Us",
+    "availability": "Service 24/7",
+    "fleet": "Large fleet"
+
   }
 }
