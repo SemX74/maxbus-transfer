@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -36,6 +36,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { motion } from "framer-motion";
 import { CardHeader, CardTitle } from "./ui/card";
+import { cn } from "@/lib/utils";
 
 // Zod schema for form validation
 const bookingSchema = z.object({
@@ -66,6 +67,7 @@ function BookingFormExctracted({
   const { toast } = useToast();
   const t = useTranslations();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const successOverlayRef = useRef<HTMLDivElement>(null);
 
   // Get unique destinations from routes data
   const allDestinations = Array.from(
@@ -115,6 +117,16 @@ function BookingFormExctracted({
     setIsFromChernivtsi(!isFromChernivtsi);
   };
 
+  // Scroll to success overlay when form is successfully submitted
+  useEffect(() => {
+    if (form.formState.isSubmitSuccessful && successOverlayRef.current) {
+      successOverlayRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [form.formState.isSubmitSuccessful]);
+
   // Calculate estimated price
   const calculatePrice = () => {
     const fromCity = form.watch("from");
@@ -162,7 +174,6 @@ function BookingFormExctracted({
           description: result.message,
           duration: 5000,
         });
-        form.reset();
       } else {
         toast({
           title: "❌ Помилка",
@@ -188,7 +199,10 @@ function BookingFormExctracted({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 bg-white rounded-2xl p-4 shadow-lg"
+        className={cn(
+          "space-y-6 bg-white rounded-2xl",
+          showTitle && "p-4 shadow-lg"
+        )}
       >
         {showTitle && (
           <CardHeader className="text-center -mb-4 pt-1 pb-0">
@@ -507,6 +521,60 @@ function BookingFormExctracted({
             {isSubmitting ? t("booking.sending") : t("booking.bookTripBtn")}
           </Button>
         </div>
+
+        {/* Success Overlay */}
+        {form.formState.isSubmitSuccessful && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="absolute inset-0 bg-white/95 backdrop-blur-sm rounded-2xl flex items-center justify-center z-50"
+            onClick={() => form.reset()}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.1, type: "spring" }}
+              className="text-center px-8 py-12"
+            >
+              <div className="mb-6">
+                <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg
+                    className="w-10 h-10 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={3}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <p
+                ref={successOverlayRef}
+                className="text-2xl font-bold text-gray-700 leading-relaxed max-w-md"
+              >
+                {t("booking.successOverlay.message")}
+              </p>
+              <p className="text-lg text-gray-800 mt-6 font-medium">
+                {t("booking.successOverlay.thanks")}
+              </p>
+              <p className="text-lg font-bold text-primary mt-4">
+                {t("booking.successOverlay.goodbye")}!
+              </p>
+              <Button
+                onClick={() => form.reset()}
+                className="mt-8 bg-gradient-primary hover:opacity-90"
+              >
+                {t("booking.successOverlay.close")}
+              </Button>
+            </motion.div>
+          </motion.div>
+        )}
       </form>
     </Form>
   );

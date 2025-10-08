@@ -41,7 +41,7 @@ const BookingForm = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto"
         >
-          <Card className="shadow-card border-0 bg-card">
+          <Card className="shadow-card border-0 bg-card relative">
             <CardHeader className="text-center pb-6">
               <CardTitle className="text-2xl font-bold text-card-foreground">
                 {t("booking.formTitle")}

@@ -226,7 +226,7 @@ const Hero = () => {
               duration: 0.8,
               delay: 0.4,
             }}
-            className="max-lg:hidden"
+            className="max-lg:hidden relative"
           >
             <BookingFormExctracted showTitle showPrice={false} />
           </motion.div>

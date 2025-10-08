@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
@@ -50,8 +50,14 @@ const WhyChooseUs = () => {
     return shuffled;
   };
 
-  // Memoize the shuffled images so they don't re-shuffle on every render
-  const galleryImages = useMemo(() => shuffleArray(availableImages), []);
+  // Use state to store shuffled images and shuffle only after mount to avoid hydration mismatch
+  const [galleryImages, setGalleryImages] = useState(availableImages);
+
+  useEffect(() => {
+    // Shuffle images after component mounts on client
+    setGalleryImages(shuffleArray(availableImages));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const openPopup = (imageName: string) => {
     setSelectedImage(imageName);

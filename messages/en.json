@@ -75,7 +75,15 @@
     "sending": "Sending...",
     "successTitle": "Booking Request Received!",
     "successMessage": "We'll call you shortly to confirm your transfer details.",
-    "cancellationPolicy": "Free cancellation up to 24 hours before departure"
+    "cancellationPolicy": "Free cancellation up to 24 hours before departure",
+    "successOverlay": {
+      "greeting": "Welcome from",
+      "company": "MaXBus",
+      "message": "Your booking has been submitted, we will contact you within a day and provide all the trip details!",
+      "thanks": "Thank you for choosing MaXBus 😍",
+      "goodbye": "Have a great day",
+      "close": "Close"
+    }
   },
   "routes": {
     "title": "Popular",
@@ -238,6 +246,5 @@
     "followUs": "Follow Us",
     "availability": "Service 24/7",
     "fleet": "Large fleet"
-
   }
 }
