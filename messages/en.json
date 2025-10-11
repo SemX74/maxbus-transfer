@@ -212,7 +212,7 @@
     "pickupNote": "Individual pickup from your location by arrangement",
     "mainLocation": {
       "name": "Chernivtsi",
-      "address": "Komara Street, 3A, Chernivtsi, Chernivtsi Oblast, 58000",
+      "address": "Skalda (Komarova) Street, 3A, Chernivtsi, Chernivtsi Oblast, 58000",
       "features": {
         "0": "Central location",
         "1": "Easy parking",
@@ -223,7 +223,7 @@
     "locations": {
       "chernivtsi": {
         "name": "Chernivtsi",
-        "address": "Komara Street, 3A, WOG station",
+        "address": "Skalda (Komarova) Street, 3A, WOG station",
         "hours": "According to schedule",
         "phone": "+380 96 169 16 42",
         "features": {
@@ -237,7 +237,7 @@
   },
   "footer": {
     "company": "MAX BUS TRANSFER",
-    "address": "Chernivtsi, Komara Street, 3A",
+    "address": "Chernivtsi, Skalda (Komarova) Street, 3A",
     "description": "Professional transfer service from Chernivtsi to European cities. Comfort, safety, and punctuality.",
     "alternativeDescription": "Professional transfer service from Chernivtsi to European cities. Comfort, safety, and punctuality for all your transportation needs.",
     "quickLinks": "Quick Links",
