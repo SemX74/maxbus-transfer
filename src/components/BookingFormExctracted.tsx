@@ -156,6 +156,7 @@ function BookingFormExctracted({
       const routeData = {
         ...data,
         route: `${data.from} → ${data.to}`,
+        timeLabel: isFromChernivtsi ? "вильоту" : "прильоту",
       };
 
       const response = await fetch("/api/telegram", {
@@ -375,7 +376,7 @@ function BookingFormExctracted({
                 <FormItem>
                   <FormLabel className="flex items-center text-sm font-medium text-card-foreground">
                     <Clock className="h-4 w-4 mr-2 text-primary" />
-                    {t("booking.departureTime")}
+                    {isFromChernivtsi ? t("booking.departureTime") : t("booking.arrivalTime")}
                   </FormLabel>
                   <FormControl>
                     <Input type="time" {...field} className="h-12" />

@@ -47,8 +47,8 @@ export const routes: RouteData[] = [
       ua: "~2.5 – 3 години",
     },
     pricing: {
-      adult: 20,
-      child: 10,
+      adult: 25,
+      child: 15,
       infant: 0,
       currency: "€",
     },
@@ -78,8 +78,8 @@ export const routes: RouteData[] = [
       ua: "~4 – 5 годин",
     },
     pricing: {
-      adult: 40,
-      child: 20,
+      adult: 45,
+      child: 25,
       infant: 0,
       currency: "€",
     },
@@ -102,15 +102,15 @@ export const routes: RouteData[] = [
     },
     to: {
       en: "Kishinev",
-      ua: "Кишинев",
+      ua: "Кишинів",
     },
     duration: {
       en: "~6 – 7 hours",
       ua: "~6 – 7 годин",
     },
     pricing: {
-      adult: 40,
-      child: 20,
+      adult: 50,
+      child: 40,
       infant: 0,
       currency: "€",
     },
@@ -140,8 +140,8 @@ export const routes: RouteData[] = [
       ua: "~8 – 9 годин",
     },
     pricing: {
-      adult: 60,
-      child: 40,
+      adult: 70,
+      child: 50,
       infant: 0,
       currency: "€",
     },

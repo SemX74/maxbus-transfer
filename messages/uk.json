@@ -55,6 +55,7 @@
     "time": "Час",
     "timePlaceholder": "Оберіть час",
     "departureTime": "Година вильоту",
+    "arrivalTime": "Година прильоту",
     "passengers": "Пасажири",
     "passenger": "пасажир",
     "passengers2": "пасажирів",
@@ -98,7 +99,7 @@
     "pricing": {
       "adults": "Дорослі",
       "children": "Діти (до 12 років)",
-      "infants": "Немовлята (0-2 роки)",
+      "infants": "Немовлята (0-3 роки)",
       "free": "Безкоштовно"
     }
   },

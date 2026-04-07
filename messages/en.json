@@ -55,6 +55,7 @@
     "time": "Time",
     "timePlaceholder": "Select time",
     "departureTime": "Departure Time",
+    "arrivalTime": "Arrival Time",
     "passengers": "Passengers",
     "passenger": "passenger",
     "passengers2": "passengers",
@@ -98,7 +99,7 @@
     "pricing": {
       "adults": "Adults",
       "children": "Children (up to 12y/car seat)",
-      "infants": "Infants (0-2y)",
+      "infants": "Infants (0-3y)",
       "free": "Free"
     }
   },

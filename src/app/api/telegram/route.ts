@@ -9,6 +9,7 @@ const bookingSchema = z.object({
   route: z.string().min(1, "Маршрут є обов'язковим"),
   date: z.string().min(1, "Дата є обов'язковою"),
   time: z.string().min(1, "Час є обов'язковим"),
+  timeLabel: z.string().optional(),
   name: z.string().min(2, "Ім'я має містити принаймні 2 символи"),
   phone: z
     .string()
@@ -37,7 +38,7 @@ export async function POST(request: NextRequest) {
 
 Маршрут: ${validatedData.route}
 Дата: ${validatedData.date}
-Час: ${validatedData.time}
+Час ${validatedData.timeLabel || "вильоту"}: ${validatedData.time}
 Ім'я: ${validatedData.name}
 Пасажирів: ${validatedData.passengers}${
       validatedData.email ? `\nEmail: ${validatedData.email}` : ""

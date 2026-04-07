@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MAX BUS TRANSFER - Premium Bus Transfer Service",
+  title: "MAX BUS TRANSFER - Трансфер з Чернівців до Сучави, Бухаресту, Ясс",
   description:
-    "Experience luxury travel with our premium fleet. Comfortable, reliable, and punctual transfers to your destination.",
+    "Професійний трансферний сервіс з Чернівців до Сучави, Бухаресту, Ясс та інших європейських міст. Швидко, безпечно та комфортно.",
 };
 
 export default async function RootLayout({
