@@ -3,16 +3,11 @@
 import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import PhoneInput, {
+import {
   isValidPhoneNumber,
   parsePhoneNumber,
-  getCountryCallingCode,
-  type Country,
-} from "react-phone-number-input";
-import flags from "react-phone-number-input/flags";
+} from "libphonenumber-js";
 import uaLabels from "react-phone-number-input/locale/ua.json";
-import "react-phone-number-input/style.css";
-import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -57,9 +52,14 @@ const bookingSchema = z.object({
   name: z.string().min(2, "Ім'я має містити принаймні 2 символи"),
   phone: z
     .string()
-    .refine((val) => val && isValidPhoneNumber(val), {
-      message: "Введіть правильний номер телефону",
-    }),
+    .refine(
+      (val) =>
+        !!val &&
+        (isValidPhoneNumber(val) || isValidPhoneNumber(val, "UA")),
+      {
+        message: "Введіть правильний номер телефону",
+      }
+    ),
   passengers: z
     .number()
     .min(1, "Кількість пасажирів має бути принаймні 1")
@@ -68,54 +68,6 @@ const bookingSchema = z.object({
 });
 
 type BookingFormData = z.infer<typeof bookingSchema>;
-
-type CountryOption = { value?: Country; label: string };
-
-function CountrySelect({
-  value,
-  onChange,
-  options,
-  disabled,
-  readOnly,
-}: {
-  value?: Country;
-  onChange: (v?: Country) => void;
-  options: CountryOption[];
-  disabled?: boolean;
-  readOnly?: boolean;
-}) {
-  const Flag = value ? flags[value] : null;
-  const callingCode = value ? getCountryCallingCode(value) : null;
-
-  return (
-    <div className="phone-country">
-      <div className="phone-country-display">
-        {Flag ? (
-          <Flag title={value as string} />
-        ) : (
-          <span className="phone-country-placeholder" />
-        )}
-        {callingCode ? <span>+{callingCode}</span> : null}
-        <ChevronDown className="h-3.5 w-3.5 opacity-60" />
-      </div>
-      <select
-        aria-label="Country"
-        disabled={disabled || readOnly}
-        value={value ?? ""}
-        onChange={(e) =>
-          onChange((e.target.value || undefined) as Country | undefined)
-        }
-        className="phone-country-native"
-      >
-        {options.map((o) => (
-          <option key={o.value ?? "XX"} value={o.value ?? ""}>
-            {o.label}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-}
 
 function BookingFormExctracted({
   showPrice = true,
@@ -212,19 +164,18 @@ function BookingFormExctracted({
   const onSubmit = async (data: BookingFormData) => {
     setIsSubmitting(true);
     try {
-      const parsed = parsePhoneNumber(data.phone);
+      const parsed =
+        parsePhoneNumber(data.phone) ?? parsePhoneNumber(data.phone, "UA");
+      const e164 = parsed?.number ?? data.phone;
       const countryName =
         parsed?.country && uaLabels[parsed.country as keyof typeof uaLabels]
           ? uaLabels[parsed.country as keyof typeof uaLabels]
           : null;
-      const phoneWithCountry = countryName
-        ? `${data.phone} (${countryName})`
-        : data.phone;
 
-      // Create route string for telegram message
       const routeData = {
         ...data,
-        phone: phoneWithCountry,
+        phone: e164,
+        phoneCountry: countryName,
         route: `${data.from} → ${data.to}`,
         timeLabel: isFromChernivtsi ? "вильоту" : "прильоту",
       };
@@ -490,14 +441,13 @@ function BookingFormExctracted({
                   {t("booking.phoneNumber")}
                 </FormLabel>
                 <FormControl>
-                  <PhoneInput
-                    defaultCountry="UA"
-                    countryCallingCodeEditable={false}
-                    labels={uaLabels}
-                    countrySelectComponent={CountrySelect}
-                    value={field.value}
-                    onChange={(value) => field.onChange(value ?? "")}
-                    className="phone-input flex items-center gap-2 text-sm"
+                  <Input
+                    type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
+                    placeholder="+380XXXXXXXXX"
+                    className="h-12"
+                    {...field}
                   />
                 </FormControl>
                 <FormMessage />

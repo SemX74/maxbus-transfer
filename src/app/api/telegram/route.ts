@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { isValidPhoneNumber } from "libphonenumber-js";
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
@@ -13,7 +14,10 @@ const bookingSchema = z.object({
   name: z.string().min(2, "Ім'я має містити принаймні 2 символи"),
   phone: z
     .string()
-    .regex(/^\+380\d{9}$/, "Введіть правильний номер телефону (+380XXXXXXXXX)"),
+    .refine((val) => val && isValidPhoneNumber(val), {
+      message: "Введіть правильний номер телефону",
+    }),
+  phoneCountry: z.string().nullable().optional(),
   passengers: z
     .number()
     .min(1, "Кількість пасажирів має бути принаймні 1")
@@ -44,7 +48,9 @@ export async function POST(request: NextRequest) {
       validatedData.email ? `\nEmail: ${validatedData.email}` : ""
     }${validatedData.comments ? `\nКоментарі: ${validatedData.comments}` : ""}
 
-👉 Подзвонити: ${validatedData.phone}`;
+👉 Подзвонити: ${validatedData.phone}${
+      validatedData.phoneCountry ? ` (${validatedData.phoneCountry})` : ""
+    }`;
 
     // Create inline keyboard with messaging options
     const keyboard = {
