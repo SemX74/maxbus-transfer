@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { isValidPhoneNumber } from "libphonenumber-js";
+import { isValidPhoneNumber, parsePhoneNumberFromString } from "libphonenumber-js";
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
@@ -14,9 +14,13 @@ const bookingSchema = z.object({
   name: z.string().min(2, "Ім'я має містити принаймні 2 символи"),
   phone: z
     .string()
-    .refine((val) => val && isValidPhoneNumber(val), {
-      message: "Введіть правильний номер телефону",
-    }),
+    .refine(
+      (val) =>
+        !!val && (isValidPhoneNumber(val) || isValidPhoneNumber(val, "UA")),
+      {
+        message: "Введіть правильний номер телефону",
+      }
+    ),
   phoneCountry: z.string().nullable().optional(),
   passengers: z
     .number()
@@ -37,6 +41,13 @@ export async function POST(request: NextRequest) {
     // Validate the data
     const validatedData = bookingSchema.parse(body);
 
+    // Normalize phone to E.164 (falls back to UA for local-format numbers)
+    const phone =
+      (
+        parsePhoneNumberFromString(validatedData.phone) ??
+        parsePhoneNumberFromString(validatedData.phone, "UA")
+      )?.number ?? validatedData.phone;
+
     // Format the message
     const message = `🚐 НОВА ЗАЯВКА
 
@@ -48,7 +59,7 @@ export async function POST(request: NextRequest) {
       validatedData.email ? `\nEmail: ${validatedData.email}` : ""
     }${validatedData.comments ? `\nКоментарі: ${validatedData.comments}` : ""}
 
-👉 Подзвонити: ${validatedData.phone}${
+👉 Подзвонити: ${phone}${
       validatedData.phoneCountry ? ` (${validatedData.phoneCountry})` : ""
     }`;
 
@@ -58,7 +69,7 @@ export async function POST(request: NextRequest) {
         [
           {
             text: "💬 WhatsApp",
-            url: `https://wa.me/${validatedData.phone.replace("+", "")}`,
+            url: `https://wa.me/${phone.replace("+", "")}`,
           },
         ],
       ],

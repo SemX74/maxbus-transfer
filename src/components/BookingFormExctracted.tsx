@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   isValidPhoneNumber,
-  parsePhoneNumber,
+  parsePhoneNumberFromString,
 } from "libphonenumber-js";
 import uaLabels from "react-phone-number-input/locale/ua.json";
 import { Button } from "@/components/ui/button";
@@ -54,8 +54,7 @@ const bookingSchema = z.object({
     .string()
     .refine(
       (val) =>
-        !!val &&
-        (isValidPhoneNumber(val) || isValidPhoneNumber(val, "UA")),
+        !!val && (isValidPhoneNumber(val) || isValidPhoneNumber(val, "UA")),
       {
         message: "Введіть правильний номер телефону",
       }
@@ -79,6 +78,7 @@ function BookingFormExctracted({
   const { toast } = useToast();
   const t = useTranslations();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSent, setIsSent] = useState(false);
   const successOverlayRef = useRef<HTMLDivElement>(null);
 
   // Get unique destinations from routes data
@@ -108,6 +108,11 @@ function BookingFormExctracted({
     },
   });
 
+  const closeSuccessOverlay = () => {
+    setIsSent(false);
+    form.reset();
+  };
+
   const swapDestinations = () => {
     const currentFrom = form.getValues("from");
     const currentTo = form.getValues("to");
@@ -131,13 +136,13 @@ function BookingFormExctracted({
 
   // Scroll to success overlay when form is successfully submitted
   useEffect(() => {
-    if (form.formState.isSubmitSuccessful && successOverlayRef.current) {
+    if (isSent && successOverlayRef.current) {
       successOverlayRef.current.scrollIntoView({
         behavior: "smooth",
         block: "center",
       });
     }
-  }, [form.formState.isSubmitSuccessful]);
+  }, [isSent]);
 
   // Calculate estimated price
   const calculatePrice = () => {
@@ -165,7 +170,8 @@ function BookingFormExctracted({
     setIsSubmitting(true);
     try {
       const parsed =
-        parsePhoneNumber(data.phone) ?? parsePhoneNumber(data.phone, "UA");
+        parsePhoneNumberFromString(data.phone) ??
+        parsePhoneNumberFromString(data.phone, "UA");
       const e164 = parsed?.number ?? data.phone;
       const countryName =
         parsed?.country && uaLabels[parsed.country as keyof typeof uaLabels]
@@ -191,6 +197,7 @@ function BookingFormExctracted({
       const result = await response.json();
 
       if (result.success) {
+        setIsSent(true);
         toast({
           title: "✅ Успішно!",
           description: result.message,
@@ -448,6 +455,19 @@ function BookingFormExctracted({
                     placeholder="+380XXXXXXXXX"
                     className="h-12"
                     {...field}
+                    onBlur={(e) => {
+                      // Show the user the number we will actually send,
+                      // so a wrong country code is visible before submit
+                      const parsed =
+                        parsePhoneNumberFromString(e.target.value) ??
+                        parsePhoneNumberFromString(e.target.value, "UA");
+
+                      if (parsed?.isValid()) {
+                        field.onChange(parsed.formatInternational());
+                      }
+
+                      field.onBlur();
+                    }}
                   />
                 </FormControl>
                 <FormMessage />
@@ -547,12 +567,12 @@ function BookingFormExctracted({
         </div>
 
         {/* Success Overlay */}
-        {form.formState.isSubmitSuccessful && (
+        {isSent && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="absolute inset-0 bg-white/95 backdrop-blur-sm rounded-2xl flex items-center justify-center z-50"
-            onClick={() => form.reset()}
+            onClick={closeSuccessOverlay}
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
@@ -591,7 +611,7 @@ function BookingFormExctracted({
                 {t("booking.successOverlay.goodbye")}!
               </p>
               <Button
-                onClick={() => form.reset()}
+                onClick={closeSuccessOverlay}
                 className="mt-8 bg-gradient-primary hover:opacity-90"
               >
                 {t("booking.successOverlay.close")}
